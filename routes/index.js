@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
 router.post('/', function (req, res) {
 	var uid = req.param('uid');
 	var kml_data = req.param('kml_data');
-	console.log(uid, kml_data);
+
 	if (!uid || !kml_data) {
 		return res.json({error: 'Missing UID or kml data'});
 	}
