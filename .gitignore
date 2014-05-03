@@ -2,4 +2,3 @@ kml_proxy.iml
 node_modules/*
 .idea
 bin/*
-public/kml/*
