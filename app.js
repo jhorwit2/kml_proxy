@@ -19,6 +19,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+
+app.use(function (req, res, next) {
+	console.log(req.url);
+	res.header('Access-Control-Allow-Origin', '*');
+	if (req.url.match(/\/kml*/)) {
+		res.header('Content-Type', 'application/vnd.google-earth.kml+xml');
+	}
+	next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -57,3 +67,11 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+var debug = require('debug')('my-application');
+
+app.set('port', process.env.PORT || 3001);
+
+var server = app.listen(app.get('port'), function() {
+	debug('Express server listening on port ' + server.address().port);
+});
