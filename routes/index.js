@@ -17,6 +17,7 @@ router.post('/', function (req, res) {
 	}
 
 	var file_name = uid + "_" + uuid.v1().substr(0, 12) + ".kml";
+	file_name = file_name.split(' ').join('_');
 
 	var error = false;
 	fs.writeFileSync("./public/kml/"+file_name, kml_data, 'utf-8', function (error) {
