@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(function (req, res, next) {
 	console.log(req.url);
 	res.header('Access-Control-Allow-Origin', '*');
-	if (req.url.match(/\/parser\/kml*/)) {
+	if (req.url.match(/\/kml*/)) {
 		res.header('Content-Type', 'application/vnd.google-earth.kml+xml');
 	}
 	next();
@@ -31,8 +31,8 @@ app.use(function (req, res, next) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/parser/', routes);
-app.use('/parser/users', users);
+app.use('/', routes);
+app.use('/users', users);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
