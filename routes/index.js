@@ -5,15 +5,16 @@ var uuid = require('node-uuid');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'KML Proxy' });
 });
 
 router.post('/', function (req, res) {
 	var uid = req.param('uid');
 	var kml_data = req.param('kml_data');
 
+	// The payload must have the UID & kml data -- can probably remove the UID later... not really needed.
 	if (!uid || !kml_data) {
-		return res.json({error: 'Missing UID or kml data'});
+		return res.json({error: 'Missing UID or kml data format should be {uid: <val>, kml_data: <val>'});
 	}
 
 	var file_name = uid + "_" + uuid.v1().substr(0, 12) + ".kml";
