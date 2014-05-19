@@ -9,15 +9,14 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function (req, res) {
-	var uid = req.param('uid');
 	var kml_data = req.param('kml_data');
 
 	// The payload must have the UID & kml data -- can probably remove the UID later... not really needed.
-	if (!uid || !kml_data) {
-		return res.json({error: 'Missing UID or kml data format should be {uid: <val>, kml_data: <val>'});
+	if (!kml_data) {
+		return res.json({error: 'Kml data format should be {kml_data: <val>'});
 	}
 
-	var file_name = uid + "_" + uuid.v1().substr(0, 12) + ".kml";
+	var file_name = uuid.v1() + ".kml";
 	file_name = file_name.split(' ').join('_');
 
 	var error = false;
