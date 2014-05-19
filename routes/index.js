@@ -19,15 +19,15 @@ router.post('/', function (req, res) {
 	var file_name = uuid.v1() + ".kml";
 	file_name = file_name.split(' ').join('_');
 
-	var error = false;
+	var file_error = false;
 	fs.writeFileSync("./public/kml/"+file_name, kml_data, 'utf-8', function (error) {
 		if (error) {
 			console.log(error);
-			error = true;
+			file_error = true;
 		}
 	});
 
-	if (error) {
+	if (file_error) {
 		return res.json({error: "Error while writing file"});
 	}
 
